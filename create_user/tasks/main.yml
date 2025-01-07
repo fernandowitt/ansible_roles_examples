@@ -1,0 +1,17 @@
+- name: Creating new user with sudo access
+  become: true
+  user:
+    name: sampleuser
+    groups: sudo
+    append: yes
+    shell: /bin/bash
+    password_lock: true
+
+- name: Remove passwords to the sudo group
+  become: true
+  lineinfile:
+    path: /etc/sudoers
+    state: present
+    regexp: '^%sudo'
+    line: '%sudo ALL=(ALL) NOPASSWD: ALL'
+    validate: 'visudo -cf %s'

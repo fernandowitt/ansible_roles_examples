@@ -1,0 +1,4 @@
+- name: Add SSH key to host
+  hosts: all
+  roles:
+    - add_ssh_keys

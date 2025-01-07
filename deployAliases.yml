@@ -1,0 +1,5 @@
+- name: Add common aliases to the host
+  hosts: all
+  gather_facts: no
+  roles:
+    - deploy_aliases

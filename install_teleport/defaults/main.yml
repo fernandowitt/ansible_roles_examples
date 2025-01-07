@@ -1,0 +1,5 @@
+node_id: ''
+server_ip: '127.0.0.1'
+teleport_auth_token: ''
+teleport_ca_pin: ''
+node_domain: 'sampledomain'

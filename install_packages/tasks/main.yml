@@ -1,0 +1,25 @@
+- name: Add Python and Pip packages through APT
+  become: true
+  apt:
+    update_cache: true
+    name:
+      - python-pip
+      - python3-pip
+
+- name: Add text editors through APT
+  become: true
+  apt:
+    name:
+      - nano
+      - vim
+
+- name: Add TOP and HTOP through APT
+  become: true
+  apt:
+    name:
+      - htop
+      - top
+
+- name: Add Lazydocker
+  become: "sampleuser"
+  shell: curl https://raw.githubusercontent.com/jesseduffield/lazydocker/master/scripts/install_update_linux.sh | bash

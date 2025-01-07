@@ -1,0 +1,4 @@
+- name: Create a new sample user with root access
+  hosts: all
+  roles:
+    - create_user

@@ -1,0 +1,8 @@
+- name: Add SSH key
+  become: true
+  authorized_key:
+    user: "sampleuser"
+    state: present
+    key: '{{ item }}'
+  with_file:
+    - keys/rsa_key_example.pub

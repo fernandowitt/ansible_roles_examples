@@ -1,0 +1,14 @@
+- name: Add aliases
+  become: true
+  copy:
+    src: .bash_aliases
+    dest: /home/sampleuser/.bash_aliases
+    owner: sampleuser
+    group: sampleuser
+
+- name: Add dps alias
+  become: true
+  copy:
+    src: dps
+    dest: /usr/local/bin/dps
+    mode: 0777

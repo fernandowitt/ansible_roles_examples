@@ -1,0 +1,52 @@
+
+- name: Install packages to allow apt using repositories with HTTPS
+  become: true
+  apt:
+    name: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'gnupg-agent' ]
+    update_cache: yes
+    state: present
+    force_apt_get: yes
+    autoclean: yes
+
+- name: Add Docker GPG key
+  shell: curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+
+- name: Add apt repository for Docker
+  become: true
+  shell: sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+
+- name: Install docker packages
+  become: true
+  apt:
+    name: [ 'docker-ce', 'docker-ce-cli', 'containerd.io']
+    update_cache: yes
+    state: present
+    autoclean: yes
+
+- name: Add sampleuser to docker group
+  become: true
+  user:
+    name: 'sampleuser'
+    append: 'yes'
+    groups: 'docker'
+
+- name: Install docker-compose
+  become: true
+  shell: curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+
+- name: Gives execution permission for docker-compose
+  become: true
+  shell: chmod +x /usr/local/bin/docker-compose
+
+- name: Add Docker packages for Python
+  become: "sampleuser"
+  pip:
+    name:
+      - docker
+
+- name: Configure socket docker for docker group
+  become: true
+  ansible.builtin.file:
+    path: /var/run/docker.sock
+    owner: root
+    group: docker

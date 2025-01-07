@@ -1,0 +1,20 @@
+teleport:
+  nodename: {{ node_id }}
+  data_dir: /var/lib/teleport
+  auth_token: {{ teleport_auth_token }}
+  ca_pin: {{ teleport_ca_pin }}
+  auth_servers:
+   - {{ server_ip }}:3025
+  log:
+    output: stderr
+    severity: INFO
+    format:
+      output: text
+auth_service:
+  enabled: "no"
+ssh_service:
+  enabled: "yes"
+  labels:
+    hostname: {{ node_domain }}
+proxy_service:
+  enabled: "no"

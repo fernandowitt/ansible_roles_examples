@@ -1,0 +1,11 @@
+alias c="clear"
+alias h="history"
+alias j="jobs -l"
+alias ports="netstat -tulanp"
+alias yep='sudo apt install $1'
+alias nop='sudo apt remove $1'
+alias sup='sudo apt update && sudo apt upgrade -y'
+alias 1cd='cd ..'
+alias 2cd='cd ..; cd ..'
+alias tarf='sudo tar -czvf $1'
+alias untar='sudo tar -xzvf $1'

@@ -1,0 +1,33 @@
+---
+- name: Download teleport .deb file
+  uri:
+    url: https://get.gravitational.com/teleport_7.3.18_amd64.deb
+    validate_certs: no
+    method: GET
+    dest: /tmp
+
+- name: Install our .deb package
+  become: true
+  apt:
+    deb: /tmp/teleport_7.3.18_amd64.deb
+
+- name: Create teleport configuration file
+  become: true
+  template:
+    force: yes
+    src: teleport.yaml.j2
+    dest: /etc/teleport.yaml
+
+- name: Enable teleport service
+  become: true
+  systemd:
+    name: teleport
+    state: started
+    enabled: yes
+    daemon_reload: yes
+
+- name: Delete the .deb file
+  become: true
+  file:
+    path: /tmp/teleport_7.3.18_amd64.deb
+    state: absent

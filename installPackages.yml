@@ -1,0 +1,5 @@
+- name: Installation of apt packages
+  hosts: all
+  gather_facts: no
+  roles:
+    - install_packages

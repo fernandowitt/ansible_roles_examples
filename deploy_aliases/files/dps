@@ -1,0 +1,9 @@
+#!/bin/bash
+echo $1
+grepp=""
+if [ -n "$1" ]
+then
+grepp="$1"
+fi
+docker ps |grep "$grepp"
+
